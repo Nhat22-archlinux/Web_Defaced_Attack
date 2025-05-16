@@ -1,7 +1,7 @@
 -- setup.sql
 
 CREATE DATABASE IF NOT EXISTS mini_vulnapp;
-USE mini_vulnapp;
+USE Web_Deface_Attack;
 
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
