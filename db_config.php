@@ -4,7 +4,7 @@
 $servername = "localhost"; // If your database runs locally
 $username = "root";         // Default username for local MySQL
 $password = "";             // Default password is often empty
-$dbname = "mini_vulnapp";   // Our database name
+$dbname = "Web_Deface_Attack";   // Our database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

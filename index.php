@@ -7,7 +7,7 @@ include('db_config.php');
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mini Vulnerable WebApp - Login</title>
+    <title>Welcome to the WebDeface Attack!</title>
     <style>
         body {
             font-family: Arial, sans-serif;

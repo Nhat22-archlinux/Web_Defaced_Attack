@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Mini VulnApp</title>
+    <title>Dashboard - Web_Deface_Attack</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,7 +54,7 @@
 <body>
     <div class="dashboard-container">
         <h2>📊 Dashboard</h2>
-        <p>Welcome to the vulnerable web application dashboard!</p>
+        <p>Welcome to the WebDeface Attack dashboard</p>
         <p>This area can be expanded for testing file upload, XSS, IDOR, etc.</p>
         <a href="index.php" class="btn">🔓 Logout</a>
     </div>

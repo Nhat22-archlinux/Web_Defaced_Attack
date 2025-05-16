@@ -1,6 +1,6 @@
 -- setup.sql
 
-CREATE DATABASE IF NOT EXISTS mini_vulnapp;
+CREATE DATABASE IF NOT EXISTS Web_Deface_Attack;
 USE Web_Deface_Attack;
 
 CREATE TABLE IF NOT EXISTS users (
