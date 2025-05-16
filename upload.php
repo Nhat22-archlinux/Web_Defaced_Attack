@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>📁 File Upload - Vulnerable App</title>
+    <title>📁 File Upload</title>
     <style>
         body {
             font-family: Arial, sans-serif;
