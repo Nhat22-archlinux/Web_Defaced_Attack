@@ -1,13 +1,17 @@
 <?php
 // db_config.php
 
-$servername = "localhost"; // If your database runs locally
-$username = "root";         // Default username for local MySQL
-$password = "";             // Default password is often empty
-$dbname = "Web_Deface_Attack";   // Our database name
+// Docker supplies these values through environment variables. The fallbacks
+// preserve the original local setup for users running PHP directly.
+$servername = getenv('DB_HOST') ?: 'localhost';
+$port = (int) (getenv('DB_PORT') ?: 3306);
+$username = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASSWORD');
+$password = $password === false ? '' : $password;
+$dbname = getenv('DB_NAME') ?: 'Web_Deface_Attack';
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // Check connection
 if ($conn->connect_error) {

@@ -1,14 +1,22 @@
 <?php
-// Cấu hình kết nối cơ sở dữ liệu
-define('DB_SERVER', 'localhost');  // Máy chủ cơ sở dữ liệu
-define('DB_USERNAME', 'root');     // Tên người dùng MySQL (mặc định là root)
-define('DB_PASSWORD', '');         // Mật khẩu người dùng MySQL (mặc định là trống)
-define('DB_DATABASE', 'vulnerable_php_db'); // Tên cơ sở dữ liệu bạn đã tạo
+// Alternate database configuration retained for compatibility with the
+// original project. Docker values come from the environment; local defaults
+// remain equivalent to the previous setup.
+define('DB_SERVER', getenv('DB_HOST') ?: 'localhost');
+define('DB_PORT', (int) (getenv('DB_PORT') ?: 3306));
+define('DB_USERNAME', getenv('DB_USER') ?: 'root');
+$databasePassword = getenv('DB_PASSWORD');
+define('DB_PASSWORD', $databasePassword === false ? '' : $databasePassword);
+define('DB_DATABASE', getenv('DB_NAME') ?: 'Web_Deface_Attack');
 
-// Kết nối đến cơ sở dữ liệu
-$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$conn = new mysqli(
+    DB_SERVER,
+    DB_USERNAME,
+    DB_PASSWORD,
+    DB_DATABASE,
+    DB_PORT
+);
 
-// Kiểm tra kết nối
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

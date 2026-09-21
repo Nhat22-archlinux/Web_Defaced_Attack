@@ -1,3 +1,9 @@
-#/uploads/
+/uploads/
+.env
 *.log
 *.DS_Store
+
+# ML data and artifacts
+Dataset/
+Notebook/
+*.h5

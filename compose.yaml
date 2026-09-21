@@ -1,0 +1,52 @@
+name: web-defaced-attack
+
+services:
+  app:
+    build:
+      context: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-Web_Deface_Attack}
+      DB_USER: ${DB_USER:-webdeface}
+      DB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    ports:
+      - "${APP_BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-8080}:80"
+    volumes:
+      - uploads_data:/var/www/html/uploads
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          php -r '$$socket = @fsockopen("127.0.0.1", 80);
+          exit($$socket ? 0 : 1);'
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set DB_ROOT_PASSWORD in .env}
+      MARIADB_DATABASE: ${DB_NAME:-Web_Deface_Attack}
+      MARIADB_USER: ${DB_USER:-webdeface}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./setup.sql:/docker-entrypoint-initdb.d/10-setup.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+volumes:
+  db_data:
+  uploads_data:
